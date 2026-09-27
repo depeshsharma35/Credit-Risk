@@ -25,7 +25,7 @@ dist/
 
 # ── Model artifacts (large binaries — track via Git LFS or exclude entirely) ──
 # Comment out the lines below if you DO want to commit the trained models.
-*.pkl
+
 *.json
 # Uncomment to also exclude native XGBoost models if you add them later:
 # *.ubj
@@ -53,3 +53,4 @@ desktop.ini
 
 # ── Conversion / scratch scripts ──────────────────────────────────────────────
 convert_model.py
+ 
