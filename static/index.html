@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Underwrite — Loan Default Risk Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <span class="wordmark">Underwrite</span>
+    <span class="topbar__tag">Loan default risk, scored in real time</span>
+  </div>
+</header>
+
+<main class="layout">
+
+  <!-- FORM -->
+  <section class="panel form-panel" aria-labelledby="form-heading">
+    <h1 id="form-heading" class="form-title">Score an application</h1>
+    <p class="form-sub">Enter the applicant and loan details below. Every field feeds the model directly.</p>
+
+    <form id="loan-form" novalidate>
+
+      <fieldset class="group">
+        <legend>Applicant</legend>
+
+        <div class="field">
+          <label for="person_age">Age</label>
+          <input type="number" id="person_age" name="person_age" min="18" max="100" step="1" placeholder="e.g. 29" required>
+          <span class="field__error" data-error-for="person_age"></span>
+        </div>
+
+        <div class="field">
+          <label for="person_income">Annual income (USD)</label>
+          <input type="number" id="person_income" name="person_income" min="0" step="100" placeholder="e.g. 58000" required>
+          <span class="field__error" data-error-for="person_income"></span>
+        </div>
+
+        <div class="field">
+          <label for="person_home_ownership">Home ownership</label>
+          <select id="person_home_ownership" name="person_home_ownership" required>
+            <option value="" disabled selected>Select one</option>
+            <option value="RENT">Rent</option>
+            <option value="OWN">Own</option>
+            <option value="MORTGAGE">Mortgage</option>
+            <option value="OTHER">Other</option>
+          </select>
+          <span class="field__error" data-error-for="person_home_ownership"></span>
+        </div>
+
+        <div class="field">
+          <label for="person_emp_length">Employment length (years)</label>
+          <input type="number" id="person_emp_length" name="person_emp_length" min="0" max="60" step="0.1" placeholder="e.g. 4.5" required>
+          <span class="field__error" data-error-for="person_emp_length"></span>
+        </div>
+      </fieldset>
+
+      <fieldset class="group">
+        <legend>Loan</legend>
+
+        <div class="field">
+          <label for="loan_intent">Loan purpose</label>
+          <select id="loan_intent" name="loan_intent" required>
+            <option value="" disabled selected>Select one</option>
+            <option value="EDUCATION">Education</option>
+            <option value="MEDICAL">Medical</option>
+            <option value="VENTURE">Venture</option>
+            <option value="PERSONAL">Personal</option>
+            <option value="DEBTCONSOLIDATION">Debt consolidation</option>
+            <option value="HOMEIMPROVEMENT">Home improvement</option>
+          </select>
+          <span class="field__error" data-error-for="loan_intent"></span>
+        </div>
+
+        <div class="field">
+          <label for="loan_grade">Loan grade</label>
+          <select id="loan_grade" name="loan_grade" required>
+            <option value="" disabled selected>Select one</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="G">G</option>
+          </select>
+          <span class="field__error" data-error-for="loan_grade"></span>
+        </div>
+
+        <div class="field">
+          <label for="loan_amnt">Loan amount (USD)</label>
+          <input type="number" id="loan_amnt" name="loan_amnt" min="0" step="100" placeholder="e.g. 12000" required>
+          <span class="field__error" data-error-for="loan_amnt"></span>
+        </div>
+
+        <div class="field">
+          <label for="loan_int_rate">Interest rate (%)</label>
+          <input type="number" id="loan_int_rate" name="loan_int_rate" min="0" max="40" step="0.01" placeholder="e.g. 11.5" required>
+          <span class="field__error" data-error-for="loan_int_rate"></span>
+        </div>
+
+        <div class="field">
+          <label for="loan_percent_income">Loan as % of income</label>
+          <input type="number" id="loan_percent_income" name="loan_percent_income" min="0" max="1" step="0.01" placeholder="e.g. 0.21 for 21%" required>
+          <span class="field__error" data-error-for="loan_percent_income"></span>
+        </div>
+      </fieldset>
+
+      <fieldset class="group">
+        <legend>Credit history</legend>
+
+        <div class="field">
+          <label for="cb_person_default_on_file">Prior default on file</label>
+          <select id="cb_person_default_on_file" name="cb_person_default_on_file" required>
+            <option value="" disabled selected>Select one</option>
+            <option value="Y">Yes</option>
+            <option value="N">No</option>
+          </select>
+          <span class="field__error" data-error-for="cb_person_default_on_file"></span>
+        </div>
+
+        <div class="field">
+          <label for="cb_person_cred_hist_length">Credit history length (years)</label>
+          <input type="number" id="cb_person_cred_hist_length" name="cb_person_cred_hist_length" min="0" max="70" step="1" placeholder="e.g. 7" required>
+          <span class="field__error" data-error-for="cb_person_cred_hist_length"></span>
+        </div>
+      </fieldset>
+
+      <div class="form-footnote" id="form-error" role="alert" aria-live="polite"></div>
+
+      <button type="submit" class="submit-btn" id="submit-btn">
+        <span class="submit-btn__label">Assess risk</span>
+        <span class="submit-btn__bar" aria-hidden="true"></span>
+      </button>
+    </form>
+  </section>
+
+  <!-- RESULT -->
+  <section class="panel result-panel" aria-live="polite">
+
+    <div class="result-state" id="state-empty">
+      <div class="empty-mark">?</div>
+      <p class="empty-title">Nothing scored yet</p>
+      <p class="empty-body">Fill in the application on the left. The moment it's submitted, the model's probability of default will appear here.</p>
+    </div>
+
+    <div class="result-state" id="state-error" hidden>
+      <div class="empty-mark empty-mark--error">!</div>
+      <p class="empty-title">The assessment didn't go through</p>
+      <p class="empty-body" id="error-message">Something went wrong.</p>
+      <p class="empty-hint" id="error-hint"></p>
+    </div>
+
+    <div class="result-state result-card" id="state-result" hidden>
+      <p class="result-eyebrow">Probability of default</p>
+      <p class="result-number"><span id="prob-value">0</span><span class="result-number__unit">%</span></p>
+
+      <div class="gauge">
+        <div class="gauge__track">
+          <div class="gauge__fill" id="gauge-fill"></div>
+          <div class="gauge__threshold" id="gauge-threshold"></div>
+        </div>
+        <div class="gauge__labels">
+          <span>0%</span>
+          <span id="threshold-label">threshold</span>
+          <span>100%</span>
+        </div>
+      </div>
+
+      <div class="verdict" id="verdict-badge">
+        <span class="verdict__dot" id="verdict-dot"></span>
+        <span id="verdict-text">—</span>
+      </div>
+
+      <dl class="result-breakdown">
+        <div><dt>Prediction</dt><dd id="out-prediction">—</dd></div>
+        <div><dt>Decision threshold</dt><dd id="out-threshold">—</dd></div>
+      </dl>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p>Runs entirely against your local FastAPI service. No data leaves your machine.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

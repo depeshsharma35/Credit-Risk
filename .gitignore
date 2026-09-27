@@ -1,0 +1,55 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+
+# ── Virtual environments ───────────────────────────────────────────────────────
+.venv/
+.venv311/
+venv/
+env/
+ENV/
+
+# ── Distribution / packaging ───────────────────────────────────────────────────
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# ── Jupyter Notebook ───────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── Model artifacts (large binaries — track via Git LFS or exclude entirely) ──
+# Comment out the lines below if you DO want to commit the trained models.
+*.pkl
+*.json
+# Uncomment to also exclude native XGBoost models if you add them later:
+# *.ubj
+
+# ── Logs & temp files ─────────────────────────────────────────────────────────
+*.log
+*.tmp
+*.bak
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE / editor ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Environment variables ──────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Conversion / scratch scripts ──────────────────────────────────────────────
+convert_model.py
