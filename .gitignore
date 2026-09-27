@@ -51,6 +51,5 @@ desktop.ini
 .env.*
 !.env.example
 
-# ── Conversion / scratch scripts ──────────────────────────────────────────────
-convert_model.py
+
  
